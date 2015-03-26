@@ -3,23 +3,36 @@ package com.suse.matcher.rules;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
-{% for item in obj %}
+{% for item in obj -%}
 //{{ item.desc }}
 rule "Add subscription data for part number {{ item.pnum }}"
     agenda-group "PartNumbers"
     when
         $subscription : Subscription(partNumber == "{{ item.pnum }}")
     then
-        modify($subscription) { {% if item.virt == "UV" %}
-            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,{% elif item.virt == "PHY" %}
-            virtualizationPolicy = Subscription.PHYSICAL,{% else %}
-            virtualizationPolicy = Subscription.TWO_TWO,{% endif %}{% if item.supp == "BS" %}
-            supportLevel = Subscription.BASIC,{% elif item.supp == "ST" %}
-            supportLevel = Subscription.STANDARD,{% elif item.supp == "PR" %}
-            supportLevel = Subscription.PRIORITY,{% endif %}
-            cpus = {{ item.cpu }},{% if item.stack == "S" %}
-            stackable = true{% else %}
-            stackable = false{% endif %}
+        modify($subscription) {
+        {% if item.virt == "UV" %}
+            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,
+        {% elif item.virt == "PHY" %}
+            virtualizationPolicy = Subscription.PHYSICAL_ONLY,
+        {% else %}
+            virtualizationPolicy = Subscription.TWO_TWO,
+        {% endif %}
+        {% if item.supp == "BS" %}
+            supportLevel = Subscription.BASIC,
+        {% elif item.supp == "ST" %}
+            supportLevel = Subscription.STANDARD,
+        {% elif item.supp == "PR" %}
+            supportLevel = Subscription.PRIORITY,
+        {% endif %}
+        {% if item.cpu %}
+            cpus = {{ item.cpu }},
+        {% endif %}
+        {% if item.stack == "S" %}
+            stackable = true
+        {% else %}
+            stackable = false
+        {% endif %}
         };
 end
 

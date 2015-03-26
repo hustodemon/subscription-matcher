@@ -96,17 +96,26 @@ def parseRow(row):
         Unknown.append(row)
         return
 
-    group = "%s-%s-%s-%s" % (cpu, virt, stack, support)
+    if cpu == "I":
+        group = "I-%s-%s-%s" % (virt, stack, support)
+        obj = {"cpu": None,
+               "virt": virt,
+               "stack": stack,
+               "supp": support,
+               "pnum": pnum,
+               "desc": desc}
+    else:
+        group = "%scpus-%s-%s-%s" % (cpu, virt, stack, support)
+        obj = {"cpu": cpu,
+               "virt": virt,
+               "stack": stack,
+               "supp": support,
+               "pnum": pnum,
+               "desc": desc}
+
     if not Groups.has_key(group):
         Groups[group] = []
     Groups[group].append((pnum, desc))
-
-    obj = {"cpu": cpu,
-           "virt": virt,
-           "stack": stack,
-           "supp": support,
-           "pnum": pnum,
-           "desc": desc}
     Obj.append(obj)
 
 if not os.path.exists("./legacy_skus.csv"):

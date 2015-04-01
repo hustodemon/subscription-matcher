@@ -19,11 +19,11 @@ rule "Add subscription data for part number {{ item.pnum }}"
             virtualizationPolicy = Subscription.TWO_TWO,
         {% endif %}
         {% if item.supp == "BS" %}
-            supportLevel = Subscription.BASIC,
+            supportLevel = "basic",
         {% elif item.supp == "ST" %}
-            supportLevel = Subscription.STANDARD,
+            supportLevel = "standard",
         {% elif item.supp == "PR" %}
-            supportLevel = Subscription.PRIORITY,
+            supportLevel = "priority",
         {% endif %}
         {% if item.cpu %}
             cpus = {{ item.cpu }},

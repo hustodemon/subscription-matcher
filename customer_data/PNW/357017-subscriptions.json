@@ -1,0 +1,73 @@
+[
+  {
+    "id": 2797582,
+    "regcode": "85DF55C5BD52C0",
+    "name": "SUSE Linux Enterprise Server for SAP Applications",
+    "type": "full",
+    "status": "ACTIVE",
+    "starts_at": "2015-03-01T00:00:00.000Z",
+    "expires_at": "2018-02-28T00:00:00.000Z",
+    "system_limit": 6,
+    "systems_count": 0,
+    "virtual_count": null,
+    "product_classes": [
+      "AiO"
+    ],
+    "systems": [
+
+    ],
+    "product_ids": [
+      1129,
+      1136,
+      1128,
+      1133,
+      1134,
+      1130,
+      1135,
+      1131,
+      1319
+    ]
+  },
+  {
+    "id": 2797583,
+    "regcode": "873D8A61076508",
+    "name": "EMEA SUSE Manager Provisioning Unlimited Virtual Machines Subscription",
+    "type": "full",
+    "status": "ACTIVE",
+    "starts_at": "2015-03-01T00:00:00.000Z",
+    "expires_at": "2018-02-28T00:00:00.000Z",
+    "system_limit": 6,
+    "systems_count": 0,
+    "virtual_count": null,
+    "product_classes": [
+      "SM_ENT_PROV_V"
+    ],
+    "systems": [
+
+    ],
+    "product_ids": [
+      1204
+    ]
+  },
+  {
+    "id": 2797584,
+    "regcode": "BEC0C7BCDF2EE8",
+    "name": "EMEA SUSE Manager Management Unlimited Virtual Machines Subscription",
+    "type": "full",
+    "status": "ACTIVE",
+    "starts_at": "2015-03-01T00:00:00.000Z",
+    "expires_at": "2018-02-28T00:00:00.000Z",
+    "system_limit": 6,
+    "systems_count": 0,
+    "virtual_count": null,
+    "product_classes": [
+      "SM_ENT_MGM_V"
+    ],
+    "systems": [
+
+    ],
+    "product_ids": [
+      1078
+    ]
+  }
+]

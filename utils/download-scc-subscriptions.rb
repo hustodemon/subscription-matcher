@@ -4,6 +4,7 @@
 require 'rest-client'
 require 'json'
 require 'base64'
+require 'fileutils'
 
 # Downloads a subscription data JSON file from SCC
 
@@ -35,5 +36,5 @@ loop do
  resp = RestClient.get(links[:next], AUTH_HEADER)
 end
 
-Dir.mkdir(ARGV[0])
+FileUtils.mkdir_p(ARGV[0])
 File.open("#{ARGV[0]}/#{ARGV[1]}-subscriptions.json", 'w') { |file| file.write(JSON.pretty_generate(subscriptions)) }

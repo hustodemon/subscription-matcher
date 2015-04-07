@@ -8,7 +8,8 @@ require 'base64'
 # Downloads a subscription data JSON file from SCC
 
 if ARGV.length != 3
-  puts "Usage: ./download-scc-subscriptions.rb ORG_NAME LOGIN PASSWORD"  
+  puts "Usage: ./download-scc-subscriptions.rb ORG_NAME LOGIN PASSWORD"
+  exit(1)
 end
 
 AUTH_HEADER = { :Authorization => 'Basic ' + Base64.encode64("#{ARGV[1]}:#{ARGV[2]}").chomp }

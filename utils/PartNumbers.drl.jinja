@@ -9,14 +9,14 @@ import com.suse.matcher.model.System;
 rule "Add subscription data for part number {{ item.pnum }}"
     agenda-group "PartNumbers"
     when
-        $subscription : Subscription(partNumber == "{{ item.pnum }}")
+        $subscription : Subscription($quantity : quantity, partNumber == "{{ item.pnum }}")
     then
         modify($subscription) {
         {% if item.virt == "UV" %}
             policy = Policy.UNLIMITED_VIRTUALIZATION,
         {% elif item.virt == "PHY" %}
             policy = Policy.PHYSICAL_ONLY,
-        {% else %}
+        {% elif item.virt == "2=2" %}
             policy = Policy.TWO_TWO,
         {% endif %}
         {% if item.supp == "BS" %}
@@ -28,6 +28,9 @@ rule "Add subscription data for part number {{ item.pnum }}"
         {% endif %}
         {% if item.cpu %}
             cpus = {{ item.cpu }},
+        {% endif %}
+        {% if item.quantityFactor %}
+            quantity = $quantity * {{ item.quantityFactor }},
         {% endif %}
         {% if item.stack == "S" %}
             stackable = true

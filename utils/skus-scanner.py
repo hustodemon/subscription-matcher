@@ -22,6 +22,7 @@ def parseRow(row):
     virt = "UV"     # UV = unlimited Virtualization, PHY = physical, 2=2 = 2 Sockets or 2 Virtual, INH = inherit
     stack = "N"     # N = non-stackable, S = Stackable
     support = "BS"  # BS = Basic, ST = Standard, PR = Priority, INH = inherit
+    quantityFactor = None
 
     desc = row['Long Item Description:'].lower()
     pnum = row['Item Number:']
@@ -92,6 +93,28 @@ def parseRow(row):
     elif "inherited subscription" in desc:
         support = "INH"
 
+    if "long term service pack" in desc:
+        cpu = "I"
+        virt = "INH"
+        stack = "N"
+        support = "INH"
+        if "unlimited servers" in desc:
+            quantityFactor = 1000000
+        elif "500 servers" in desc:
+            quantityFactor = 500
+        elif "100 servers" in desc:
+            quantityFactor = 100
+        elif "10 ifls" in desc:
+            quantityFactor = 10
+        elif "5 ifls" in desc:
+            quantityFactor = 5
+        elif "unlimited ifls" in desc:
+            quantityFactor = 1000000
+        else:
+            #print "Unknown quantityFactor for %s" % desc
+            cpu = None
+            return
+
     if cpu is None:
         Unknown.append(row)
         return
@@ -103,7 +126,8 @@ def parseRow(row):
                "stack": stack,
                "supp": support,
                "pnum": pnum,
-               "desc": desc}
+               "desc": desc,
+               "quantityFactor": quantityFactor}
     else:
         group = "%scpus-%s-%s-%s" % (cpu, virt, stack, support)
         obj = {"cpu": cpu,
@@ -111,7 +135,8 @@ def parseRow(row):
                "stack": stack,
                "supp": support,
                "pnum": pnum,
-               "desc": desc}
+               "desc": desc,
+               "quantityFactor": quantityFactor}
 
     if not Groups.has_key(group):
         Groups[group] = []

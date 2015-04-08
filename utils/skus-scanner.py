@@ -99,7 +99,7 @@ def parseRow(row):
         stack = "N"
         support = "INH"
         if "unlimited servers" in desc:
-            quantityFactor = 1000000
+            quantityFactor = -1
         elif "500 servers" in desc:
             quantityFactor = 500
         elif "100 servers" in desc:
@@ -109,7 +109,7 @@ def parseRow(row):
         elif "5 ifls" in desc:
             quantityFactor = 5
         elif "unlimited ifls" in desc:
-            quantityFactor = 1000000
+            quantityFactor = -1
         else:
             #print "Unknown quantityFactor for %s" % desc
             cpu = None

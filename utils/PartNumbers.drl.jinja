@@ -30,7 +30,11 @@ rule "Add subscription data for part number {{ item.pnum }}"
             cpus = {{ item.cpu }},
         {% endif %}
         {% if item.quantityFactor %}
+          {% if item.quantityFactor == -1 %}
+            quantity = Double.POSITIVE_INFINITY,
+          {% else %}
             quantity = $quantity * {{ item.quantityFactor }},
+          {% endif %}
         {% endif %}
         {% if item.stack == "S" %}
             stackable = true

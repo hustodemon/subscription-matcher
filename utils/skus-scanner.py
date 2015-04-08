@@ -57,7 +57,8 @@ def parseRow(row):
 
     if (" hosted " in desc or
         " 1-instance " in desc or
-        " 1 instance " in desc):
+        " 1 instance " in desc or
+        " 1-device " in desc):
         cpu = "I"
     elif "2 sockets or 2 virtual" in desc:
         cpu = "2"

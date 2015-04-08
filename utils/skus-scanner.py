@@ -151,5 +151,7 @@ if printUnknown:
         print "%s: %s" % (u['Item Number:'], u['Long Item Description:'])
         cnt2 += 1
 
-print "items in groups: %d" % cnt1
-print "unknown items  : %d" % cnt2
+if printGroups:
+    print "items in groups: %d" % cnt1
+if printUnknown:
+    print "unknown items  : %d" % cnt2

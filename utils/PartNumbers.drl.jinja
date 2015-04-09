@@ -23,8 +23,12 @@ rule "Add subscription data for part number {{ item.pnum }}"
             supportLevel = "basic",
         {% elif item.supp == "ST" %}
             supportLevel = "standard",
+        {% elif item.supp == "L3ST" %}
+            supportLevel = "l3-standard",
         {% elif item.supp == "PR" %}
             supportLevel = "priority",
+        {% elif item.supp == "L3PR" %}
+            supportLevel = "l3-priority",
         {% endif %}
         {% if item.cpu %}
             cpus = {{ item.cpu }},

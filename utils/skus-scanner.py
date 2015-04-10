@@ -176,7 +176,6 @@ def parseRowNew(row):
         cpu = num
         if "4 osd node" in desc:
             quantityFactor = 4
-            virt = "INST"
         #print "CPUS: %s - %s" % (cpu, desc)
     elif " ifl" in desc:
         cpu = "1"

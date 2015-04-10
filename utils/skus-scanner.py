@@ -259,13 +259,15 @@ def parseRowNew(row):
 
 if not os.path.exists("./legacy_skus.csv"):
     os.system("wget http://w3.suse.de/~mc/SUSEManager/SKUs/legacy_skus.csv")
+if not os.path.exists("./ihv_isv.csv"):
+    os.system("wget http://w3.suse.de/~mc/SUSEManager/SKUs/ihv_isv.csv")
+
 
 with open('./ihv_isv.csv', 'rb') as csvfile:
     skusreader = csv.DictReader(csvfile, delimiter=',')
     for row in skusreader:
         #print "row: %s" % row
         parseRowNew(row)
-#with open('./ihv_isv.csv', 'rb') as csvfile:
 with open('./legacy_skus.csv', 'rb') as csvfile:
     skusreader = csv.DictReader(csvfile, delimiter=',', quoting=csv.QUOTE_NONE)
     for row in skusreader:

@@ -31,6 +31,9 @@ def parseRow(row):
     if pnum in Partnumbers:
         # duplicate
         return
+    if pnum == "N/A":
+        # invalid
+        return
 
     # ignore bundels. Needs special handling
     if pnum in ('051-004968','051-004972','051-004969',
@@ -65,6 +68,7 @@ def parseRow(row):
         " 1 instance " in desc or
         " 1-device " in desc):
         cpu = "I"
+        virt = "INST"
     elif "2 sockets or 2 virtual" in desc:
         cpu = "2"
         virt = "2=2"
@@ -78,12 +82,15 @@ def parseRow(row):
     elif ("suse manager server" in desc or
           "suse manager proxy" in desc):
         cpu = "I"
+        virt = "INST"
     elif ("suse manager management" in desc or
           "suse manager provisioning" in desc or
           "suse manager monitoring" in desc or
           "suse manager lifecycle management" in desc):
         cpu = "I"
         if "single instance" in desc:
+            # single instance for system entitlements was meant
+            # really physical
             virt = "PHY"
 
     if (" phy" in desc or
@@ -163,6 +170,9 @@ def parseRowNew(row):
     if pnum in Partnumbers:
         # duplicate
         return
+    if pnum == "N/A":
+        # invalid
+        return
 
     # ignore bundels. Needs special handling
     #if pnum in (''):
@@ -188,6 +198,7 @@ def parseRowNew(row):
         " 1 instance" in desc or
         " 1-device" in desc or
         " 1 scom instance" in desc or
+        " single instance" in desc or
         " additional instance" in desc):
         cpu = "I"
         stack = "N"

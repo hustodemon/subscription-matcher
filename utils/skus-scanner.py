@@ -152,7 +152,7 @@ def parseRow(row):
 
 def parseRowNew(row):
     cpu = None      # I = Instance, <num>cpus, <num>ifls
-    virt = "UV"     # UV = unlimited Virtualization, PHY = physical, 2=2 = 2 Sockets or 2 Virtual, INH = inherit
+    virt = "PHY"     # UV = unlimited Virtualization, PHY = physical, 2=2 = 2 Sockets or 2 Virtual, INH = inherit, INST = Instance
     stack = "S"     # N = non-stackable, S = Stackable
     support = "BS"  # BS = Basic, ST = Standard, PR = Priority, INH = inherit
     quantityFactor = None
@@ -174,17 +174,25 @@ def parseRowNew(row):
     elif recpu.search(desc):
         num = recpu.search(desc).groups()[0]
         cpu = num
+        if "4 osd node" in desc:
+            quantityFactor = 4
+            virt = "INST"
         #print "CPUS: %s - %s" % (cpu, desc)
     elif " ifl" in desc:
         cpu = "1"
+        virt = "UV"
+    elif " 1 physical server" in desc:
+        cpu = "I"
+        stack = "N"
     elif (" hosted " in desc or
         " 1-instance" in desc or
         " 1 instance" in desc or
         " 1-device" in desc or
-        " 1 physical server" in desc or
         " 1 scom instance" in desc or
         " additional instance" in desc):
         cpu = "I"
+        stack = "N"
+        virt = "INST"
     elif " 1-2 instances" in desc:
         cpu = "I"
         quantityFactor = 2

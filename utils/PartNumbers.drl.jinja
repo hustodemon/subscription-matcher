@@ -16,6 +16,8 @@ rule "Add subscription data for part number {{ item.pnum }}"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
         {% elif item.virt == "PHY" %}
             policy = Policy.PHYSICAL_ONLY,
+        {% elif item.virt == "INST" %}
+            policy = Policy.INSTANCE,
         {% elif item.virt == "2=2" %}
             policy = Policy.TWO_TWO,
         {% endif %}

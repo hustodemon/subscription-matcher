@@ -8,6 +8,7 @@
       "id" : 28640,
       "virtual_count" : null,
       "system_limit" : 1,
+      "part_number": "877-001319",
       "product_ids" : [
          1118,
          868,
@@ -156,6 +157,7 @@
       "id" : 70630,
       "virtual_count" : null,
       "system_limit" : 1,
+      "part_number": "877-001304",
       "product_ids" : [
          1117,
          1220,
@@ -284,6 +286,7 @@
       "id" : 70643,
       "virtual_count" : null,
       "system_limit" : 1,
+      "part_number": "877-001302",
       "product_ids" : [
          1117,
          1220,
@@ -524,6 +527,7 @@
          1307
       ],
       "system_limit" : 1,
+      "part_number": "",
       "systems" : [],
       "status" : "EXPIRED",
       "type" : "full",
@@ -645,6 +649,7 @@
          1307
       ],
       "system_limit" : 1,
+      "part_number": "874-005162",
       "type" : "full",
       "systems" : [],
       "status" : "EXPIRED",
@@ -779,6 +784,7 @@
          1307
       ],
       "system_limit" : 1,
+      "part_number": "877-001302",
       "virtual_count" : null,
       "id" : 70707,
       "name" : "EMEA - SUSE Linux Enterprise Server x86/AMD64/Intel64 Activation Code",
@@ -796,6 +802,7 @@
       "id" : 70746,
       "virtual_count" : null,
       "system_limit" : 1,
+      "part_number": "877-000043",
       "product_ids" : [
          1117,
          1220,
@@ -923,6 +930,7 @@
       "systems" : [],
       "status" : "ACTIVE",
       "system_limit" : 201,
+      "part_number": "874-006273",
       "product_ids" : [
          1129,
          1136,
@@ -957,6 +965,7 @@
       "systems" : [],
       "status" : "ACTIVE",
       "system_limit" : 1621,
+      "part_number" : "874-006301",
       "product_ids" : [
          1117,
          1220,
@@ -1190,6 +1199,7 @@
          1307
       ],
       "system_limit" : 1,
+      "part_number" : "874-006561",
       "virtual_count" : null,
       "id" : 70773,
       "product_classes" : [
@@ -1324,10 +1334,12 @@
          1299,
          1307
       ],
-      "system_limit" : 1
+      "system_limit" : 1,
+      "part_number": "874-006025"
    },
    {
       "system_limit" : 570,
+      "part_number": "874-005025",
       "product_ids" : [
          1137
       ],
@@ -1354,6 +1366,7 @@
       "id" : 70794,
       "virtual_count" : null,
       "system_limit" : 1,
+      "part_number": "874-006001",
       "product_ids" : [
          1117,
          1220,
@@ -1521,6 +1534,7 @@
          1254
       ],
       "system_limit" : 239,
+      "part_number" : "874-005607",
       "virtual_count" : null,
       "id" : 70799,
       "product_classes" : [
@@ -1654,6 +1668,7 @@
          1139
       ],
       "system_limit" : 269,
+      "part_number" : "874-006453",
       "virtual_count" : null,
       "id" : 70810,
       "starts_at" : "2011-06-01T00:00:00.000Z",
@@ -1678,6 +1693,7 @@
       "type" : "full",
       "status" : "ACTIVE",
       "system_limit" : 1,
+      "part_number" : "874-006565",
       "product_ids" : [
          1117,
          1220,
@@ -1800,6 +1816,7 @@
       "id" : 70817,
       "virtual_count" : null,
       "system_limit" : 6,
+      "part_number" : "874-005943",
       "product_ids" : [
          1001,
          1224,
@@ -1967,7 +1984,8 @@
          1299,
          1307
       ],
-      "system_limit" : 100
+      "system_limit" : 100,
+      "part_number": "874-005031"
    },
    {
       "product_classes" : [
@@ -1978,6 +1996,7 @@
       "id" : 70832,
       "virtual_count" : null,
       "system_limit" : 100,
+      "part_number": "874-005031",
       "product_ids" : [
          1137
       ],
@@ -2002,6 +2021,7 @@
          1141
       ],
       "system_limit" : 5,
+      "part_number": "874-005944",
       "systems" : [],
       "type" : "full",
       "status" : "ACTIVE",
@@ -2024,6 +2044,7 @@
       "systems" : [],
       "type" : "full",
       "system_limit" : 2200,
+      "part_number": "874-005947",
       "product_ids" : [
          1076
       ]
@@ -2039,6 +2060,7 @@
          1097
       ],
       "system_limit" : 2200,
+      "part_number": "874-005949",
       "virtual_count" : null,
       "id" : 675449,
       "starts_at" : "2013-10-01T00:00:00.000Z",
@@ -2049,6 +2071,7 @@
    },
    {
       "system_limit" : 247,
+      "part_number": "874-006303",
       "product_ids" : [
          1129,
          1136,
@@ -2082,6 +2105,7 @@
       "status" : "ACTIVE",
       "type" : "full",
       "system_limit" : 30,
+      "part_number": "874-006273",
       "product_ids" : [
          1129,
          1136,
@@ -2222,6 +2246,7 @@
          1307
       ],
       "system_limit" : 7,
+      "part_number": "874-006098",
       "systems" : [],
       "status" : "ACTIVE",
       "type" : "full",

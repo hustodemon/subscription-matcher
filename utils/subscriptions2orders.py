@@ -96,7 +96,7 @@ for cred in options.orgcreds:
 
             if options.debug:
                 print "id: %s, part_number: %s, start_date: %s, end_date: %s, node_count: %s" % (
-                    fulfillment_id, , start_date, end_date, node_count)
+                    fulfillment_id, part_number, start_date, end_date, node_count)
             item['part_number'] = part_number
             item['starts_at'] = start_date.strftime('%FT%TZ')
             item['expires_at'] = end_date.strftime('%FT%TZ')

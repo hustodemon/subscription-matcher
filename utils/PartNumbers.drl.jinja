@@ -7,7 +7,6 @@ import com.suse.matcher.facts.System;
 {% for item in obj -%}
 //{{ item.desc }}
 rule "Add subscription data for part number {{ item.pnum }}"
-    agenda-group "FirstGroup"
     when
         $subscription : Subscription($quantity : quantity, partNumber == "{{ item.pnum }}")
     then

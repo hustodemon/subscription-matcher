@@ -7,8 +7,15 @@ import com.suse.matcher.facts.System;
 {% for item in obj -%}
 //{{ item.desc }}
 rule "Add subscription data for part number {{ item.pnum }}"
+    {% if item.quantityFactor %}
+    no-loop
+    {% endif %}
     when
+        {% if item.quantityFactor %}
         $subscription : Subscription($quantity : quantity, partNumber == "{{ item.pnum }}")
+        {% else %}
+        $subscription : Subscription(partNumber == "{{ item.pnum }}")
+        {% endif %}
     then
         modify($subscription) {
         {% if item.virt == "UV" %}

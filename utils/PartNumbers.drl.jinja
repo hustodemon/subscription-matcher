@@ -36,7 +36,7 @@ rule "Add subscription data for part number {{ item.pnum }}"
         {% endif %}
         {% if item.quantityFactor %}
           {% if item.quantityFactor == -1 %}
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
           {% else %}
             quantity = $quantity * {{ item.quantityFactor }},
           {% endif %}

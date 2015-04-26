@@ -69,8 +69,6 @@ def parseRow(row):
         " 1-device " in desc):
         cpu = "I"
         virt = "INST"
-    elif "per "in desc and ("engine" in desc or "socket" in desc or "ifl" in desc):
-        cpu = 1
     elif "socket pair" in desc:
         cpu = 2
     elif "2 sockets or 2 virtual" in desc:
@@ -96,6 +94,8 @@ def parseRow(row):
             # single instance for system entitlements was meant
             # really physical
             virt = "PHY"
+    elif "per "in desc and ("engine" in desc or "socket" in desc or "ifl" in desc):
+        cpu = 1
 
     if (" phy" in desc or
         " for appliance " in desc):
@@ -185,8 +185,6 @@ def parseRowNew(row):
     if "1-2 sockets or 1-2 virtual" in desc:
         cpu = "2"
         virt = "2=2"
-    elif "per "in desc and ("engine" in desc or "socket" in desc or "ifl" in desc):
-        cpu = 1
     elif "socket pair" in desc:
         cpu = 2
     elif recpu.search(desc):
@@ -214,6 +212,8 @@ def parseRowNew(row):
     elif " 1-2 instances" in desc:
         cpu = "I"
         quantityFactor = 2
+    elif "per "in desc and ("engine" in desc or "socket" in desc or "ifl" in desc):
+        cpu = 1
 
     if " unlimited virtual machines" in desc:
         virt = "UV"

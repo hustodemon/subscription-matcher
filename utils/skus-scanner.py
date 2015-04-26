@@ -69,6 +69,10 @@ def parseRow(row):
         " 1-device " in desc):
         cpu = "I"
         virt = "INST"
+    elif "per "in desc and ("engine" in desc or "socket" in desc or "ifl" in desc):
+        cpu = 1
+    elif "socket pair" in desc:
+        cpu = 2
     elif "2 sockets or 2 virtual" in desc:
         cpu = "2"
         virt = "2=2"
@@ -181,6 +185,10 @@ def parseRowNew(row):
     if "1-2 sockets or 1-2 virtual" in desc:
         cpu = "2"
         virt = "2=2"
+    elif "per "in desc and ("engine" in desc or "socket" in desc or "ifl" in desc):
+        cpu = 1
+    elif "socket pair" in desc:
+        cpu = 2
     elif recpu.search(desc):
         num = recpu.search(desc).groups()[0]
         cpu = num

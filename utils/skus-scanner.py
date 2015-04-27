@@ -30,6 +30,60 @@ class BaseParser:
         self.support = "BS"  # BS = Basic, ST = Standard, PR = Priority, INH = inherit, L3PR = vendor priority, L3ST = vendor standard
         self.quantityFactor = None
 
+        self.unhandled = {
+            '662644470924': 'opensuse 10.2 german',
+            '877-000377': 'suse/zenworks linux management suite for ibm zseries and for ibm s/390 1-cpu (category 1: multiprise g5) 3-year maintenance',
+            '873-010502': 'mono tools for visual academic shopnovell license',
+            '873-010513': 'mono for android professional renewal',
+            '811-122103-001': 'suse linux 10 strong encryption (128+ bit) japanese',
+            '051-004961': 'sap royalty allocation for sles sap- us books',
+            '662644473598': 'opensuse 11.1 dvd strong encryption (128+bit) english',
+            '051-004626': 'opensuse professional ticket',
+            '876-000589': 'libreoffice for windows fte academic license',
+            '873-010516': 'mono for android academic',
+            '051-004625': 'opensuse supporter ticket',
+            '876-000592': 'libreoffice for windows fte school license',
+            '662644471921': 'opensuse 10.3 german',
+            '113-003085-001': 'mono tools for visual studio enterprise maintenance certificate',
+            '876-000590': 'libreoffice for windows workstation academic license',
+            '873-010501': 'mono touch academic shopnovell license',
+            '873-010367': 'mono touch enterprise upgrade license',
+            '873-010368': 'mono touch enterprise 5-pack upgrade license',
+            'SEG1620': 'product segment 1620 suse products -general accounting use',
+            'SEG1621': 'product segment 1621 suse linux enterprise server (sles) -general accounting use',
+            '113-003104-001': 'novell se for enterprise linux-business class training voucher',
+            '877-006625': 'mono tools for visual studio ultimate',
+            '113-002664-001': 'suse linux enterprise mono extension for zseries license',
+            '113-002280-001': 'education license certificate',
+            '877-006624': 'mono tools for visual studio enterprise',
+            '873-010512': 'mono for android for enterprise 5-pack',
+            '873-010366': 'mono touch professional upgrade license',
+            '051-004882': 'suse solid driver program level 1 membership 1-year',
+            '873-010511': 'mono for android enterprise',
+            '662644473604': 'opensuse 11.1 dvd strong encryption (128+bit) german',
+            '877-006623': 'mono tools for visual studio professional',
+            '051-004883': 'suse solid driver program level 2 membership 1-year',
+            '051-004884': 'suse solid driver program level 3 membership 1-year',
+            'ROY-005166': 'suse moblin royalty',
+            '873-010510': 'mono for android professional',
+            '873-010125': 'mono touch from novell corporate edition (5-developer license)',
+            '061-000142': 'developer service & offerings open platform solutions ds1000',
+            '051-003557': 'ximian mono maintenance',
+            '873-010582': 'do not use - suse studio license (up to 2 instances)',
+            '873-010124': 'mono touch from novell corporate edition',
+            '874-006445': 'individual support for nomura - sles 9 sp3 for system z',
+            'ROY-005165': 'suse moblin (includes fluendo codecs bundle)',
+            '873-010123': 'mono touch from novell personal edition',
+            '051-002690': 'ximian mono license',
+            '051-004536': 'huawei hamsta test suite license + 3-year maintenance',
+            '051-003556': 'microsoft for the translator',
+            'ROY-005135': 'suse linux professional 9.2',
+            'ROY-005107': 'suse linux enterprise server 9 internet commercial service provider license',
+            '051-003449': 'suse custom engineering -t&m type',
+            '051-003889': 'suse developer service program',
+            'ROY-005168': 'suse linux enterprise desktop 90-day royalty',
+            '061-000147': 'non-recurring engineering for ibm'
+            }
     def isUnknown(self):
         return self.unknown
 
@@ -40,6 +94,12 @@ class BaseParser:
         if not self.partnumber or self.partnumber == "N/A":
             self.unknown = True
             return
+        # no need to match these part numbers
+        if self.partnumber in self.unhandled:
+            self.unknown = True
+            return
+
+
         # ignore bundels. Needs special handling
         if self.partnumber in ('051-004968','051-004972','051-004969',
                     '051-004970','051-004971','874-006862','876-000258',

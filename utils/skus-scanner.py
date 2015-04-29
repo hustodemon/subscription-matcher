@@ -96,6 +96,7 @@ class BaseParser:
             '877-001510': 'SUSE Linux Enterprise Virtual Machine Driver Pack Unlimited Images 3-Year Maintenance',
             '877-001508': 'SUSE Linux Enterprise Virtual Machine Driver Pack Up to 4 Virtual Images 3-Year Maintenance'
             }
+
     def isUnknown(self):
         return self.unknown
 
@@ -210,7 +211,9 @@ class BaseParser:
             self.support = "INH"
 
         if "long term service pack" in self.description:
-            self.cpu = "I"
+            #self.cpu = "I"
+            # LTSS makes trouble. So we ignore them for now.
+            self.cpu = None
             self.virt = "INH"
             self.stack = "N"
             self.support = "INH"

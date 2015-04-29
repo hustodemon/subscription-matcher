@@ -82,7 +82,19 @@ class BaseParser:
             '051-003449': 'suse custom engineering -t&m type',
             '051-003889': 'suse developer service program',
             'ROY-005168': 'suse linux enterprise desktop 90-day royalty',
-            '061-000147': 'non-recurring engineering for ibm'
+            '061-000147': 'non-recurring engineering for ibm',
+            '874-005217': 'SUSE Linux Enterprise Virtual Machine Driver Pack, x86-64, 1-4 Virtual Machines, Inherited Subscription, 1 Year',
+            '874-005219': 'SUSE Linux Enterprise Virtual Machine Driver Pack, x86-64, Unlimited Virtual Machines, Inherited Subscription, 1 Year',
+            '874-005218': 'SUSE Linux Enterprise Virtual Machine Driver Pack, x86-64, 1-4 Virtual Machines, Inherited Subscription, 3 Year',
+            '874-005220': 'VMDP X86-64 ULVM INH S 3Y","SUSE Linux Enterprise Virtual Machine Driver Pack, x86-64, Unlimited Virtual Machines, Inherited Subscription, 3 Year',
+            '874-005215': 'SUSE Linux Enterprise Virtual Machine Driver Pack (Unlimited Images; Inherited Subscription Level; 1 Year)',
+            '874-005214': 'SUSE Linux Enterprise Virtual Machine Driver Pack (Up to 4 Virtual Images; Inherited Subscription Level; 3 Year)',
+            '874-005213': 'SUSE Linux Enterprise Virtual Machine Driver Pack (Up to 4 Virtual Images; Inherited Subscription Level; 1 Year)',
+            '877-001509': 'SUSE Linux Enterprise Virtual Machine Driver Pack Unlimited Images 1-Year Maintenance',
+            '874-005216': 'SUSE Linux Enterprise Virtual Machine Driver Pack (Unlimited Images; Inherited Subscription Level; 3 Year)',
+            '877-001507': 'SUSE Linux Enterprise Virtual Machine Driver Pack Up to 4 Virtual Images 1-Year Maintenance',
+            '877-001510': 'SUSE Linux Enterprise Virtual Machine Driver Pack Unlimited Images 3-Year Maintenance',
+            '877-001508': 'SUSE Linux Enterprise Virtual Machine Driver Pack Up to 4 Virtual Images 3-Year Maintenance'
             }
     def isUnknown(self):
         return self.unknown

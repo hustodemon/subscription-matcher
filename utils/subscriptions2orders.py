@@ -82,6 +82,7 @@ for cred in options.orgcreds:
             print "download subscriptions"
 
     for item in subscriptions:
+        # maybe scc_org_id is not needed by the matcher anymore
         item['scc_org_id'] = orgname
         cursor.execute(None, {'orgname': orgname, 'regcode': item['regcode']})
         if options.debug:
@@ -100,8 +101,8 @@ for cred in options.orgcreds:
             item['part_number'] = part_number
             item['starts_at'] = start_date.strftime('%FT%TZ')
             item['expires_at'] = end_date.strftime('%FT%TZ')
-            item['system_limit'] = node_count
-            item['id'] = fulfillment_id
+            item['system_limit'] = node_count # maybe rename system_limit to quantity in future?
+            item['id'] = fulfillment_id       # for now use fulfillment_id until we have something better
             result.append(copy.deepcopy(item))
 
 with open(args[0], 'w') as f:

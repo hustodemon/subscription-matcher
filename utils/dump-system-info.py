@@ -38,7 +38,7 @@ SELECT virtual_system_id from rhnVirtualInstance where host_system_id = :server_
 
 h = rhnSQL.prepare("""
 SELECT s.id, s.org_id, s.name,
-       (SELECT 1 FROM rhnVirtualInstance vi WHERE vi.virtual_system_id = s.id) is_virtual,
+       (SELECT UUID FROM rhnVirtualInstance vi WHERE vi.virtual_system_id = s.id) vm_uuid,
        c.nrsocket cpus
 from rhnServer s
 left join rhnCpu c ON s.id = c.server_id
@@ -49,7 +49,7 @@ while 1:
     item = h.fetchone_dict()
     if not item:
         break
-    if item['is_virtual'] is None:
+    if item['vm_uuid'] is None:
         item['is_virtual'] = False
     else:
         item['is_virtual'] = True

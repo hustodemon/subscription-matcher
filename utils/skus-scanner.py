@@ -347,7 +347,7 @@ class NewSubscriptionParser(BaseParser):
             self.quantityFactor = "500"
         elif " UL " in self.description:
             self.cpu = "I"
-            self.quantityFactor = "INFINITE"
+            self.quantityFactor = "-1"
         elif " IFL " in self.description:
             self.cpu = "1"
             self.virt = "UV"

@@ -8,6 +8,9 @@ import collections
 
 import jinja2
 
+# file provided by PM (joe@suse.com)
+from partnumbers_all import part_numbers
+
 printGroups = True
 printUnknown = True
 
@@ -268,6 +271,125 @@ class NewSubscriptionParser(BaseParser):
         self.support = "BS"  # BS = Basic, ST = Standard, PR = Priority, INH = inherit
         self.quantityFactor = None
 
+    def parse(self, pnum, descr):
+        self.partnumber = pnum
+        self.description = " %s " % descr
+
+        if not self.partnumber or self.partnumber == "N/A":
+            self.unknown = True
+            return
+        # no need to match these part numbers
+        if self.partnumber in self.unhandled:
+            self.unknown = True
+            return
+
+        # VIRT
+        if " ULVM " in self.description:
+            self.virt = "UV"
+        elif " 1-2S/VM " in self.description:
+            self.virt = "2=2"
+        elif " PHYS " in self.description:
+            self.virt = "PHY"
+        elif " INST " in self.description:
+            self.virt = "INST"
+        elif " 1-100 " in self.description:
+            self.virt = "INST"
+        elif " 1-500 " in self.description:
+            self.virt = "INST"
+        elif " UL " in self.description:
+            self.virt = "INST"
+        elif " 1-2INST " in self.description:
+            self.virt = "INST"
+        elif " ADDTL INST " in self.description:
+            self.virt = "INST"
+
+        # CPU
+        if " 1S " in self.description:
+            self.cpu = "1"
+        elif " 1-2S ULVM " in self.description:
+            self.cpu = "2"
+            self.virt = "UV"
+        elif " 1-2S/VM " in self.description:
+            self.cpu = "2"
+            self.virt = "2=2"
+        elif " 1-2S " in self.description:
+            self.cpu = "2"
+        elif " 4N1-2S " in self.description:
+            self.cpu = "2"
+            self.quantityFactor = "4"
+        elif " 1N1-2S " in self.description:
+            self.cpu = "2"
+        elif " 1-4VM " in self.description:
+            self.cpu = "I"
+        elif " INH VRT " in self.description:
+            self.cpu = "2"
+            self.virt = "INH"
+        elif " PHYS SRV " in self.description:
+            self.cpu = "I"
+            self.virt = "PHY"
+        #elif " INST 1-50 " in self.description:
+        #    self.cpu = "I"
+        #    self.quantityFactor = "50"
+        elif " 1-2INST " in self.description:
+            self.cpu = "I"
+            self.quantityFactor = "2"
+        elif " ADDTL INST " in self.description:
+            self.cpu = "I"
+        elif " SCOM INST " in self.description:
+            self.cpu = "I"
+        elif " INST " in self.description:
+            self.cpu = "I"
+        elif " 1-100 " in self.description:
+            self.cpu = "I"
+            self.quantityFactor = "100"
+        elif " 1-500 " in self.description:
+            self.cpu = "I"
+            self.quantityFactor = "500"
+        elif " UL " in self.description:
+            self.cpu = "I"
+            self.quantityFactor = "INFINITE"
+        elif " IFL " in self.description:
+            self.cpu = "1"
+            self.virt = "UV"
+
+        # Support
+        if " L3PR " in self.description:
+            self.support = "L3PR"
+        elif " PR " in self.description:
+            self.support = "PR"
+        elif " L3ST " in self.description:
+            self.support = "L3ST"
+        elif " ST " in self.description:
+            self.support = "ST"
+        elif " BS " in self.description:
+            self.support = "BS"
+        elif " INH " in self.description:
+            self.support = "INH"
+
+        # Stack
+        if " INST " in self.description:
+            self.stack = "N"
+        elif " 1-100 " in self.description:
+            self.stack = "N"
+        elif " 1-500 " in self.description:
+            self.stack = "N"
+        elif " UL " in self.description:
+            self.stack = "N"
+        elif " PHYS SRV " in self.description:
+            self.stack = "N"
+
+        obj = {"cpu": self.cpu,
+               "virt": self.virt,
+               "stack": self.stack,
+               "supp": self.support,
+               "pnum": self.partnumber,
+               "desc": self.description.strip(),
+               "quantityFactor": self.quantityFactor}
+        if self.cpu == "I":
+            obj["cpu"] = None
+
+        return obj
+
 ParsedItems = dict()
 ParsedObjects = list()
 ParsedUnknown = list()
@@ -275,26 +397,21 @@ ParsedUnknown = list()
 
 if not os.path.exists("./legacy_skus.csv"):
     os.system("wget http://w3.suse.de/~mc/SUSEManager/SKUs/legacy_skus.csv")
-if not os.path.exists("./ihv_isv.csv"):
-    os.system("wget http://w3.suse.de/~mc/SUSEManager/SKUs/ihv_isv.csv")
 
-with open('./ihv_isv.csv', 'rb') as csvfile:
-    skusreader = csv.DictReader(csvfile, delimiter=',')
-    for row in skusreader:
-        pnum = row['Part Number']
-        if pnum in ParsedItems:
-            # duplicate
-            continue
-        #print "row: %s" % row
-        nsp = NewSubscriptionParser()
-        item = nsp.parse(pnum, row['Product Description'])
-        if not item:
-            continue
-        ParsedItems[pnum] = item
-        if nsp.isUnknown():
-            ParsedUnknown.append(item)
-        else:
-            ParsedObjects.append(item)
+for descr,pnum in part_numbers.iteritems():
+    if pnum in ParsedItems:
+        # duplicate
+        continue
+    #print "row: %s" % descr
+    nsp = NewSubscriptionParser()
+    item = nsp.parse(pnum, descr)
+    if not item:
+        continue
+    ParsedItems[pnum] = item
+    if nsp.isUnknown():
+        ParsedUnknown.append(item)
+    else:
+        ParsedObjects.append(item)
 
 with open('./legacy_skus.csv', 'rb') as csvfile:
     skusreader = csv.DictReader(csvfile, delimiter=',', quoting=csv.QUOTE_NONE)

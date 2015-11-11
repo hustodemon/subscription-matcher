@@ -320,9 +320,11 @@ templateLoader = jinja2.FileSystemLoader( searchpath="./" )
 templateEnv = jinja2.Environment( loader=templateLoader, trim_blocks=True, lstrip_blocks=True )
 template = templateEnv.get_template("./PartNumbers.drl.jinja")
 
+ParsedObjects.sort(key=lambda obj: obj['pnum'])
 template.stream(obj=ParsedObjects).dump("./PartNumbers.drl")
 
 
+ParsedUnknown.sort(key=lambda obj: obj['pnum'])
 if printUnknown:
     print "UNKNOWN:"
     for u in ParsedUnknown:

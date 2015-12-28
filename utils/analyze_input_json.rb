@@ -9,8 +9,7 @@ def resolve_products(system, products)
     .sort {|a, b| a["name"] <=> b["name"]}
 end
 
-input = JSON.parse(File.read("input.json"))
-output = JSON.parse(File.read("output.json"))
+input = JSON.parse(File.read(ARGV.first))
 
 systems = input["systems"]
 products = input["products"]
@@ -27,7 +26,7 @@ hosts = systems
     host["virtual_systems"] = systems
       .select {|guest| host["virtual_system_ids"].include?(guest["id"]) }
       .sort {|a, b| a["name"] <=> b["name"]}
-      .map do |guest| 
+      .map do |guest|
         guest["products"] = resolve_products(guest, products)
         guest
       end

@@ -216,7 +216,7 @@ public class OptaPlanner {
          */
         TerminationConfig termination = new TerminationConfig();
         termination.setUnimprovedStepCountLimit(100);
-        termination.setStepCountLimit(3_000);
+        termination.setStepCountLimit(14_000);
         termination.setHoursSpentLimit(1L);
         search.setTerminationConfig(termination);
 

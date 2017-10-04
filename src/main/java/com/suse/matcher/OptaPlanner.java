@@ -211,7 +211,7 @@ public class OptaPlanner {
          *
          * At some point we have to stop stepping, and we do so when:
          *   - we stepped 100 times with no score improvement (typically)
-         *   - we stepped 3_000 times (when all else fails)
+         *   - we stepped 14_000 times (when all else fails)
          *   - we spent 1 hour finding the solution
          */
         TerminationConfig termination = new TerminationConfig();

@@ -81,13 +81,3 @@ rule "maximizePinnedMatches"
         scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end
 
-rule "preferBundledMatches"
-    when
-        PartialMatch($groupId : groupId, $systemId : systemId, $centGroupId : centGroupId)
-        Match(id == $groupId, confirmed == true)
-        PartialMatch($groupId2 : groupId, systemId == $systemId, centGroupId == $centGroupId)
-        Match(id == $groupId2, id > $groupId, confirmed == true)
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, 1);
-end
-
